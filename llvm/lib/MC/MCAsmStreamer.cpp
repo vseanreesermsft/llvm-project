@@ -158,6 +158,8 @@ public:
   void emitAssignment(MCSymbol *Symbol, const MCExpr *Value) override;
   void emitWeakReference(MCSymbol *Alias, const MCSymbol *Symbol) override;
   bool emitSymbolAttribute(MCSymbol *Symbol, MCSymbolAttr Attribute) override;
+  void emitDwarfAdvanceFrameAddr(const MCSymbol *LastLabel,
+                                 const MCSymbol *Label) override;
 
   void emitSymbolDesc(MCSymbol *Symbol, unsigned DescValue) override;
   void BeginCOFFSymbolDef(const MCSymbol *Symbol) override;
@@ -631,6 +633,36 @@ void MCAsmStreamer::emitWeakReference(MCSymbol *Alias, const MCSymbol *Symbol) {
   OS << ", ";
   Symbol->print(OS, MAI);
   EmitEOL();
+}
+
+static const MCExpr *buildSymbolDiff(MCContext &Context,
+                                     const MCSymbol *A,
+                                     const MCSymbol *B) {
+  MCSymbolRefExpr::VariantKind Variant = MCSymbolRefExpr::VK_None;
+  const MCExpr *ARef = MCSymbolRefExpr::create(A, Variant, Context);
+  const MCExpr *BRef = MCSymbolRefExpr::create(B, Variant, Context);
+  const MCExpr *AddrDelta =
+      MCBinaryExpr::create(MCBinaryExpr::Sub, ARef, BRef, Context);
+  return AddrDelta;
+}
+
+static const MCExpr *forceExpAbs(MCStreamer &Streamer, const MCExpr* Expr) {
+  MCContext &Context = Streamer.getContext();
+  assert(!isa<MCSymbolRefExpr>(Expr));
+  if (Context.getAsmInfo()->hasAggressiveSymbolFolding())
+    return Expr;
+
+   MCSymbol *ABS = Context.createTempSymbol();
+   Streamer.emitAssignment(ABS, Expr);
+   return MCSymbolRefExpr::create(ABS, Context);
+ }
+
+void MCAsmStreamer::emitDwarfAdvanceFrameAddr(const MCSymbol *LastLabel,
+                                              const MCSymbol *Label) {
+  emitIntValue(dwarf::DW_CFA_advance_loc4, 1);
+  const MCExpr *AddrDelta = buildSymbolDiff(getContext(), Label, LastLabel);
+  AddrDelta = forceExpAbs(*this, AddrDelta);
+  emitValue(AddrDelta, 4);
 }
 
 bool MCAsmStreamer::emitSymbolAttribute(MCSymbol *Symbol,
