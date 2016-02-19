@@ -390,6 +390,9 @@ class LLVM_EXTERNAL_VISIBILITY MachineFunction {
   /// \pre Fn, Target, MMI, and FunctionNumber are properly set.
   void init();
 
+  // Stack slot containing the this pointer for mono compiled functions
+  int MonoThisSlot;
+
 public:
   struct VariableDbgInfo {
     const DILocalVariable *Var;
@@ -599,6 +602,9 @@ public:
   void setSection(MCSection *S) { Section = S; }
 
   PseudoSourceValueManager &getPSVManager() const { return *PSVManager; }
+
+  int getMonoThisSlot() const { return MonoThisSlot; }
+  void setMonoThisSlot(int Slot) { MonoThisSlot = Slot; }
 
   /// Return the DataLayout attached to the Module associated to this MF.
   const DataLayout &getDataLayout() const;
