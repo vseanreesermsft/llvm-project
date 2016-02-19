@@ -85,4 +85,7 @@
 /* Define if LLVM was built with a dependency to the libtensorflow dynamic library */
 #cmakedefine LLVM_HAVE_TF_API
 
+/* Mono api version */
+#cmakedefine MONO_API_VERSION ${MONO_API_VERSION}
+
 #endif
