@@ -205,6 +205,8 @@ void MachineFunction::init() {
   PSVManager =
     std::make_unique<PseudoSourceValueManager>(*(getSubtarget().
                                                   getInstrInfo()));
+
+  MonoThisSlot = -1;
 }
 
 MachineFunction::~MachineFunction() {
