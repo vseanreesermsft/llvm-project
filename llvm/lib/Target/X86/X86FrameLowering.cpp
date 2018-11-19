@@ -1364,7 +1364,10 @@ void X86FrameLowering::emitPrologue(MachineFunction &MF,
   bool NeedsWinFPO =
       !IsFunclet && STI.isTargetWin32() && MMI.getModule()->getCodeViewFlag();
   bool NeedsWinCFI = NeedsWin64CFI || NeedsWinFPO;
-  bool NeedsDwarfCFI = !IsWin64Prologue && MF.needsFrameMoves();
+  bool NeedsDwarfCFI =
+      Fn.getCallingConv() == CallingConv::Mono
+          ? MF.needsFrameMoves()
+          : !IsWin64Prologue && MF.needsFrameMoves();
   Register FramePtr = TRI->getFrameRegister(MF);
   const Register MachineFramePtr =
       STI.isTarget64BitILP32()
