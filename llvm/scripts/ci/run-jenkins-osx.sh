@@ -11,14 +11,14 @@ llvm32_CMAKE_FLAGS="$llvm_base_CMAKE_FLAGS -DLLVM_BUILD_32_BITS=On"
 rm -rf build
 mkdir -p build
 cd build
-cmake $llvm64_CMAKE_FLAGS -DCMAKE_INSTALL_PREFIX=$PWD/../usr64 ../
+cmake $llvm64_CMAKE_FLAGS -DCMAKE_INSTALL_PREFIX=$PWD/../usr64 ../llvm/
 ninja
 ninja install
 cd ..
 rm -rf build32
 mkdir -p build32
 cd build32
-cmake $llvm32_CMAKE_FLAGS -DCMAKE_INSTALL_PREFIX=$PWD/../usr32 ../
+cmake $llvm32_CMAKE_FLAGS -DCMAKE_INSTALL_PREFIX=$PWD/../usr32 ../llvm/
 ninja
 ninja install
 cd ..
