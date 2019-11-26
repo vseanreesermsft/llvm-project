@@ -1,0 +1,21 @@
+<Project>
+  <Import Project="Directory.Build.props" />
+  <Import Project="Directory.Build.targets" />
+
+  <Target Name="Build">
+    <ItemGroup>
+      <_LlvmBuildArg Include="-DCMAKE_BUILD_TYPE=Release" />
+      <_LlvmBuildArg Include='-DCMAKE_C_FLAGS="-I../llvm/include -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -DNDEBUG -D__NO_CTYPE_INLINE -D_GNU_SOURCE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS"' />
+      <_LlvmBuildArg Include='-DCMAKE_CXX_FLAGS="-I../llvm/include -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -DNDEBUG -D__NO_CTYPE_INLINE -D_GNU_SOURCE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS"' />
+      <_LlvmBuildArg Include='-DLLVM_TARGETS_TO_BUILD="X86%3BAArch64%3BARM"' />
+    </ItemGroup>
+    <MakeDir Directories="BuildRoot" />
+    <Exec WorkingDirectory="BuildRoot" Command="cmake ../llvm/ @(_LlvmBuildArg->'%(Identity)',' ')" />
+    <Exec WorkingDirectory="BuildRoot" Command="make" />
+  </Target>
+
+  <Target Name="Restore" />
+  <Target Name="Test" />
+  <Target Name="Pack" />
+</Project>
+
