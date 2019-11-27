@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <ItemGroup>
+    <File Include="..\..\artifacts\tmp\InstallRoot\bin\llvm-config" TargetPath="tools\$(PackageRID)\bin\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\bin\llvm-dis" TargetPath="tools\$(PackageRID)\bin\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\bin\llvm-tblgen" TargetPath="tools\$(PackageRID)\bin\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\lib\*" Exclude="libLTO*" TargetPath="tools\$(PackageRID)\lib\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\lib\cmake\llvm\*" TargetPath="tools\$(PackageRID)\lib\cmake\llvm\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\*" TargetPath="tools\$(PackageRID)\include\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm-c\*" TargetPath="tools\$(PackageRID)\include\llvm-c\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm-c\Transforms\*" TargetPath="tools\$(PackageRID)\llvm-c\Transforms\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\*" TargetPath="tools\$(PackageRID)\include\llvm\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\ADT\*" TargetPath="tools\$(PackageRID)\include\llvm\ADT\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\Analysis\*" TargetPath="tools\$(PackageRID)\include\llvm\Analysis\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\AsmParser\*" TargetPath="tools\$(PackageRID)\include\llvm\AsmParser\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\BinaryFormat\*" TargetPath="tools\$(PackageRID)\include\llvm\BinaryFormat\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\BinaryFormat\ELFRelocs\*" TargetPath="tools\$(PackageRID)\include\llvm\BinaryFormat\ELFRelocs\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\Bitcode\*" TargetPath="tools\$(PackageRID)\include\llvm\Bitcode\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\CodeGen\*" TargetPath="tools\$(PackageRID)\include\llvm\CodeGen\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\CodeGen\GlobalISel\*" TargetPath="tools\$(PackageRID)\include\llvm\CodeGen\GlobalISel\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\CodeGen\MIRParser\*" TargetPath="tools\$(PackageRID)\include\llvm\CodeGen\MIRParser\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\CodeGen\PBQP\*" TargetPath="tools\$(PackageRID)\include\llvm\CodeGen\PBQP\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\Config\*" TargetPath="tools\$(PackageRID)\include\llvm\Config\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\DebugInfo\*" TargetPath="tools\$(PackageRID)\include\llvm\DebugInfo\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\DebugInfo\CodeView\*" TargetPath="tools\$(PackageRID)\include\llvm\DebugInfo\CodeView\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\DebugInfo\DWARF\*" TargetPath="tools\$(PackageRID)\include\llvm\DebugInfo\DWARF\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\DebugInfo\MSF\*" TargetPath="tools\$(PackageRID)\include\llvm\DebugInfo\MSF\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\DebugInfo\PDB\*" TargetPath="tools\$(PackageRID)\include\llvm\DebugInfo\PDB\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\DebugInfo\PDB\DIA\*" TargetPath="tools\$(PackageRID)\include\llvm\DebugInfo\PDB\DIA\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\DebugInfo\PDB\Native\*" TargetPath="tools\$(PackageRID)\include\llvm\DebugInfo\PDB\Native\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\DebugInfo\Symbolize\*" TargetPath="tools\$(PackageRID)\include\llvm\DebugInfo\Symbolize\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\Demangle\*" TargetPath="tools\$(PackageRID)\include\llvm\Demangle\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\ExecutionEngine\*" TargetPath="tools\$(PackageRID)\include\llvm\ExecutionEngine\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\ExecutionEngine\Orc\*" TargetPath="tools\$(PackageRID)\include\llvm\ExecutionEngine\Orc\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\FuzzMutate\*" TargetPath="tools\$(PackageRID)\include\llvm\FuzzMutate\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\IR\*" TargetPath="tools\$(PackageRID)\include\llvm\IR\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\IRReader\*" TargetPath="tools\$(PackageRID)\include\llvm\IRReader\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\LineEditor\*" TargetPath="tools\$(PackageRID)\include\llvm\LineEditor\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\Linker\*" TargetPath="tools\$(PackageRID)\include\llvm\Linker\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\LTO\*" TargetPath="tools\$(PackageRID)\include\llvm\LTO\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\LTO\legacy\*" TargetPath="tools\$(PackageRID)\include\llvm\LTO\legacy\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\MC\*" TargetPath="tools\$(PackageRID)\include\llvm\MC\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\MC\MCDisassembler\*" TargetPath="tools\$(PackageRID)\include\llvm\MC\MCDisassembler\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\MC\MCParser\*" TargetPath="tools\$(PackageRID)\include\llvm\MC\MCParser\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\Object\*" TargetPath="tools\$(PackageRID)\include\llvm\Object\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\ObjectYAML\*" TargetPath="tools\$(PackageRID)\include\llvm\ObjectYAML\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\Option\*" TargetPath="tools\$(PackageRID)\include\llvm\Option\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\Passes\*" TargetPath="tools\$(PackageRID)\include\llvm\Passes\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\ProfileData\*" TargetPath="tools\$(PackageRID)\include\llvm\ProfileData\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\ProfileData\Coverage\*" TargetPath="tools\$(PackageRID)\include\llvm\ProfileData\Coverage\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\Support\*" TargetPath="tools\$(PackageRID)\include\llvm\Support\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\Support\Solaris\*" TargetPath="tools\$(PackageRID)\include\llvm\Support\Solaris\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\Support\Solaris\sys\*" TargetPath="tools\$(PackageRID)\include\llvm\Support\Solaris\sys\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\TableGen\*" TargetPath="tools\$(PackageRID)\include\llvm\TableGen\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\Target\*" TargetPath="tools\$(PackageRID)\include\llvm\Target\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\Target\GlobalISel\*" TargetPath="tools\$(PackageRID)\include\llvm\Target\GlobalISel\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\Testing\*" TargetPath="tools\$(PackageRID)\include\llvm\Testing\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\Testing\Support\*" TargetPath="tools\$(PackageRID)\include\llvm\Testing\Support\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\ToolDrivers\*" TargetPath="tools\$(PackageRID)\include\llvm\ToolDrivers\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\ToolDrivers\llvm-dlltool\*" TargetPath="tools\$(PackageRID)\include\llvm\ToolDrivers\llvm-dlltool\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\ToolDrivers\llvm-lib\*" TargetPath="tools\$(PackageRID)\include\llvm\ToolDrivers\llvm-lib\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\Transforms\*" TargetPath="tools\$(PackageRID)\include\llvm\Transforms\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\Transforms\InstCombine\*" TargetPath="tools\$(PackageRID)\include\llvm\Transforms\InstCombine\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\Transforms\Instrumentation\*" TargetPath="tools\$(PackageRID)\include\llvm\Transforms\Instrumentation\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\Transforms\IPO\*" TargetPath="tools\$(PackageRID)\include\llvm\Transforms\IPO\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\Transforms\Scalar\*" TargetPath="tools\$(PackageRID)\include\llvm\Transforms\Scalar\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\Transforms\Utils\*" TargetPath="tools\$(PackageRID)\include\llvm\Transforms\Utils\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\Transforms\Vectorize\*" TargetPath="tools\$(PackageRID)\include\llvm\Transforms\Vectorize\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\WindowsManifest\*" TargetPath="tools\$(PackageRID)\include\llvm\WindowsManifest\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\WindowsResource\*" TargetPath="tools\$(PackageRID)\include\llvm\WindowsResource\" />
+    <File Include="..\..\artifacts\tmp\InstallRoot\include\llvm\XRay\*" TargetPath="tools\$(PackageRID)\include\llvm\XRay\" />
+  </ItemGroup>
+</Project>
