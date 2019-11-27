@@ -4,4 +4,7 @@
     <VersionPrefix>1.0.0</VersionPrefix>
     <PreReleaseVersionLabel>prerelease</PreReleaseVersionLabel>
   </PropertyGroup>
+  <PropertyGroup>
+    <MicrosoftDotNetBuildTasksPackagingVersion>5.0.0-beta.19567.2</MicrosoftDotNetBuildTasksPackagingVersion>
+  </PropertyGroup>
 </Project>
