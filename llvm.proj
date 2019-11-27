@@ -14,7 +14,10 @@
     <Exec WorkingDirectory="$(MSBuildProjectDirectory)\artifacts\tmp\BuildRoot" Command="make all -j8" IgnoreStandardErrorWarningFormat="true" />
     <Exec WorkingDirectory="$(MSBuildProjectDirectory)\artifacts\tmp\BuildRoot" Command="cmake -DCMAKE_INSTALL_PREFIX=$(MSBuildProjectDirectory)/artifacts/tmp/InstallRoot -P cmake_install.cmake" />
     <RemoveDir Directories="$(MSBuildProjectDirectory)\artifacts\tmp\InstallRoot\share" />
-    <Delete Files="$(MSBuildProjectDirectory)\artifacts\tmp\InstallRoot\lib\libLTO*;$(MSBuildProjectDirectory)\artifacts\tmp\InstallRoot\lib\BugpointPasses.so" />
+    <ItemGroup>
+      <FilesToDelete Include="$(MSBuildProjectDirectory)\artifacts\tmp\InstallRoot\lib\libLTO*" />
+    </ItemGroup>
+    <Delete Files="$(MSBuildProjectDirectory)\artifacts\tmp\InstallRoot\lib\BugpointPasses.so;@(FilesToDelete)" ContinueOnError="true" TreatErrorsAsWarnings="true" />
   </Target>
 
   <Target Name="Restore" />
