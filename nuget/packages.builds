@@ -1,5 +1,5 @@
 <Project Sdk="Microsoft.Build.Traversal">
-  <ItemGroup Condition="'$(__SkipCoreLibBuild)'==''">
+  <ItemGroup>
     <ProjectReference Include="Microsoft.NETCore.Runtime.Mono.LLVM.Sdk\Microsoft.NETCore.Runtime.Mono.LLVM.Sdk.builds" />
     <ProjectReference Include="Microsoft.NETCore.Runtime.Mono.LLVM.Tools\Microsoft.NETCore.Runtime.Mono.LLVM.Tools.builds" />
   </ItemGroup>

@@ -22,6 +22,8 @@
 
   <Target Name="Restore" />
   <Target Name="Test" />
-  <Target Name="Pack" />
+  <Target Name="Pack" DependsOnTargets="Build">
+    <MSBuild Projects="nuget\packages.builds" Targets="Build" />
+  </Target>
 </Project>
 
