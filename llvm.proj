@@ -9,8 +9,8 @@
       <_LlvmBuildArg Include='-DCMAKE_CXX_FLAGS="-I../llvm/include -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -DNDEBUG -D__NO_CTYPE_INLINE -D_GNU_SOURCE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS"' />
       <_LlvmBuildArg Include='-DLLVM_TARGETS_TO_BUILD="X86%3BAArch64%3BARM"' />
     </ItemGroup>
-    <MakeDir Directories="$(MSBuildProjectDirectory)\artifacts\tmp\BuildRoot" />
-    <Exec WorkingDirectory="$(MSBuildProjectDirectory)\artifacts\tmp\BuildRoot" Command="cmake $(MSBuildProjectDirectory)/llvm/ @(_LlvmBuildArg->'%(Identity)',' ')" />
+    <MakeDir Directories="$(MSBuildProjectDirectory)\artifacts\tmp\BuildRoot" Condition="!Exists('$(MSBuildProjectDirectory)\artifacts\tmp\BuildRoot')" />
+    <Exec WorkingDirectory="$(MSBuildProjectDirectory)\artifacts\tmp\BuildRoot" Command="cmake $(MSBuildProjectDirectory)/llvm/ @(_LlvmBuildArg->'%(Identity)',' ')" Condition="!Exists('$(MSBuildProjectDirectory)\artifacts\tmp\BuildRoot\CMakeCache.txt')" />
     <Exec WorkingDirectory="$(MSBuildProjectDirectory)\artifacts\tmp\BuildRoot" Command="make all -j8" IgnoreStandardErrorWarningFormat="true" />
     <Exec WorkingDirectory="$(MSBuildProjectDirectory)\artifacts\tmp\BuildRoot" Command="cmake -DCMAKE_INSTALL_PREFIX=$(MSBuildProjectDirectory)/artifacts/tmp/InstallRoot -P cmake_install.cmake" />
     <RemoveDir Directories="$(MSBuildProjectDirectory)\artifacts\tmp\InstallRoot\share" />
