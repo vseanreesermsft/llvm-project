@@ -16,8 +16,9 @@
     <RemoveDir Directories="$(MSBuildProjectDirectory)\artifacts\tmp\InstallRoot\share" />
     <ItemGroup>
       <FilesToDelete Include="$(MSBuildProjectDirectory)\artifacts\tmp\InstallRoot\lib\libLTO*" />
+      <FilesToDelete Include="$(MSBuildProjectDirectory)\artifacts\tmp\InstallRoot\lib\BugpointPasses.*" />
     </ItemGroup>
-    <Delete Files="$(MSBuildProjectDirectory)\artifacts\tmp\InstallRoot\lib\BugpointPasses.so;@(FilesToDelete)" ContinueOnError="true" TreatErrorsAsWarnings="true" />
+    <Delete Files="@(FilesToDelete)" ContinueOnError="true" TreatErrorsAsWarnings="true" />
   </Target>
 
   <Target Name="Restore" />
