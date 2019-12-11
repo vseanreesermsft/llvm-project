@@ -10,14 +10,15 @@
       <_LlvmBuildArg Include='-DLLVM_TARGETS_TO_BUILD="X86%3BAArch64%3BARM"' />
     </ItemGroup>
     <MakeDir Directories="$(MSBuildProjectDirectory)\artifacts\tmp\BuildRoot" Condition="!Exists('$(MSBuildProjectDirectory)\artifacts\tmp\BuildRoot')" />
-    <Exec WorkingDirectory="$(MSBuildProjectDirectory)\artifacts\tmp\BuildRoot" Command="cmake $(MSBuildProjectDirectory)/llvm/ @(_LlvmBuildArg->'%(Identity)',' ')" Condition="!Exists('$(MSBuildProjectDirectory)\artifacts\tmp\BuildRoot\CMakeCache.txt')" />
+    <Exec WorkingDirectory="$(MSBuildProjectDirectory)\artifacts\tmp\BuildRoot" Command="cmake $(MSBuildProjectDirectory)/llvm/ @(_LlvmBuildArg->'%(Identity)',' ')" Condition="!Exists('$(MSBuildProjectDirectory)\artifacts\tmp\BuildRoot\CMakeCache.txt')" IgnoreStandardErrorWarningFormat="true" />
     <Exec WorkingDirectory="$(MSBuildProjectDirectory)\artifacts\tmp\BuildRoot" Command="make all -j8" IgnoreStandardErrorWarningFormat="true" />
     <Exec WorkingDirectory="$(MSBuildProjectDirectory)\artifacts\tmp\BuildRoot" Command="cmake -DCMAKE_INSTALL_PREFIX=$(MSBuildProjectDirectory)/artifacts/tmp/InstallRoot -P cmake_install.cmake" />
     <RemoveDir Directories="$(MSBuildProjectDirectory)\artifacts\tmp\InstallRoot\share" />
     <ItemGroup>
       <FilesToDelete Include="$(MSBuildProjectDirectory)\artifacts\tmp\InstallRoot\lib\libLTO*" />
+      <FilesToDelete Include="$(MSBuildProjectDirectory)\artifacts\tmp\InstallRoot\lib\BugpointPasses.*" />
     </ItemGroup>
-    <Delete Files="$(MSBuildProjectDirectory)\artifacts\tmp\InstallRoot\lib\BugpointPasses.so;@(FilesToDelete)" ContinueOnError="true" TreatErrorsAsWarnings="true" />
+    <Delete Files="@(FilesToDelete)" ContinueOnError="true" TreatErrorsAsWarnings="true" />
   </Target>
 
   <Target Name="Restore" />
