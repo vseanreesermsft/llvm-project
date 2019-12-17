@@ -51,11 +51,13 @@ stages:
           name: $(poolname)
         steps:
         - bash: |
+            set -ex
             git clean -ffdx
             git reset --hard HEAD
           displayName: 'Clean up working directory'
 
         - bash: |
+            set -ex
             sudo apt update
             sudo apt -y install nuget libgdiplus build-essential libtool libtool-bin cmake gettext bc
           displayName: 'Install Linux dependencies'
@@ -87,6 +89,7 @@ stages:
           name: $(poolname)
         steps:
         - bash: |
+            set -ex
             git clean -ffdx
             git reset --hard HEAD
           displayName: 'Clean up working directory'
@@ -121,6 +124,7 @@ stages:
           name: $(poolname)
         steps:
         - bash: |
+            set -ex
             git clean -ffdx
             git reset --hard HEAD
           displayName: 'Clean up working directory'
