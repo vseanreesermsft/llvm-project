@@ -59,7 +59,7 @@ stages:
         - bash: |
             set -ex
             sudo apt update
-            sudo apt -y install nuget libgdiplus build-essential libtool libtool-bin cmake gettext bc
+            sudo apt -y install build-essential libtool libtool-bin cmake gettext
           displayName: 'Install Linux dependencies'
           condition: and(succeeded(), eq(variables['installDependencies'], 'true'))
 
@@ -95,7 +95,7 @@ stages:
           displayName: 'Clean up working directory'
 
         - bash: |
-            brew install autoconf automake libtool gnu-sed
+            brew install autoconf automake libtool
           displayName: 'Prepare macOS dependencies'
 
         - bash: |
