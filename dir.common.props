@@ -73,31 +73,4 @@
 
   </PropertyGroup>
 
-  <PropertyGroup>
-    <LangVersion>8.0</LangVersion>
-    <UseSharedCompilation>true</UseSharedCompilation>
-  </PropertyGroup>
-
-  <!-- Set the kind of PDB to Portable -->
-  <PropertyGroup>
-    <DebugType Condition="'$(DebugType)' == ''">Portable</DebugType>
-  </PropertyGroup>
-
-  <!-- Common properties -->
-  <PropertyGroup>
-
-    <!-- Default to portable build if not explicitly set -->
-    <PortableBuild Condition="'$(PortableBuild)' == ''">true</PortableBuild>
-
-    <!-- If true, indicates that this is not an officially supported release -->
-    <!-- It is important to flip this to false in official release branches -->
-    <!-- Keep it in sync with PRERELEASE in clrdefinitions.cmake -->
-    <IsPrerelease>true</IsPrerelease>
-  </PropertyGroup>
-
-  <!-- Output paths -->
-  <PropertyGroup>
-    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-  </PropertyGroup>
-
 </Project>
