@@ -13,7 +13,7 @@
     <MakeDir Directories="$(MSBuildProjectDirectory)\artifacts\tmp\BuildRoot" Condition="!Exists('$(MSBuildProjectDirectory)\artifacts\tmp\BuildRoot')" />
     <Exec WorkingDirectory="$(MSBuildProjectDirectory)\artifacts\tmp\BuildRoot" Command="cmake $(MSBuildProjectDirectory)/llvm/ @(_LlvmBuildArg->'%(Identity)',' ')" Condition="!Exists('$(MSBuildProjectDirectory)\artifacts\tmp\BuildRoot\CMakeCache.txt')" IgnoreStandardErrorWarningFormat="true" />
     <Exec WorkingDirectory="$(MSBuildProjectDirectory)\artifacts\tmp\BuildRoot" Command="make all -j8" IgnoreStandardErrorWarningFormat="true" Condition="$(OS) != 'Windows_NT'" />
-    <Exec WorkingDirectory="$(MSBuildProjectDirectory)\artifacts\tmp\BuildRoot" Command="msbuild LLVM.sln /p:Configuration=Release" IgnoreStandardErrorWarningFormat="true" Condition="$(OS) == 'Windows_NT'" />
+    <Exec WorkingDirectory="$(MSBuildProjectDirectory)\artifacts\tmp\BuildRoot" Command="$(MSBuildProjectDirectory)\eng\common\msbuild.ps1 LLVM.sln /p:Configuration=Release" IgnoreStandardErrorWarningFormat="true" Condition="$(OS) == 'Windows_NT'" />
     <Exec WorkingDirectory="$(MSBuildProjectDirectory)\artifacts\tmp\BuildRoot" Command="cmake -DCMAKE_INSTALL_PREFIX=$(MSBuildProjectDirectory)/artifacts/tmp/InstallRoot -P cmake_install.cmake" />
     <RemoveDir Directories="$(MSBuildProjectDirectory)\artifacts\tmp\InstallRoot\share" />
     <ItemGroup>
