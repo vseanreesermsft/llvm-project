@@ -64,12 +64,8 @@ stages:
           condition: and(succeeded(), eq(variables['installDependencies'], 'true'))
 
         - bash: |
-            ./build.sh --ci --restore --build -c $(_BuildConfig)
-          displayName: 'Build (Make)'
-
-        - bash: |
-            ./build.sh --ci --pack
-          displayName: 'Build nupkg'
+            ./build.sh --ci --restore --build --pack -c $(_BuildConfig)
+          displayName: 'Build and package'
 
 #        - script: ./eng/common/build.sh --ci --restore --publish --configuration $(_BuildConfig) /p:DotNetPublishUsingPipelines=true /p:DotNetPublishToBlobFeed=true /p:DotNetPublishBlobFeedUrl=$(_DotNetFeedUrl) /p:DotNetPublishBlobFeedKey=$(dotnetfeed-storage-access-key-1) /p:DotNetArtifactsCategory=$(_DotNetArtifactsCategory) /p:AssetManifestOS=$(assetManifestOS) /p:PlatformName=$(assetManifestPlatform) --projects $(Build.SourcesDirectory)/eng/empty.csproj
 #          displayName: Publish packages
@@ -99,12 +95,8 @@ stages:
           displayName: 'Prepare macOS dependencies'
 
         - bash: |
-            ./build.sh --ci --restore --build -c $(_BuildConfig)
-          displayName: 'Build (Make)'
-
-        - bash: |
-            ./build.sh --ci --pack
-          displayName: 'Build nupkg'
+            ./build.sh --ci --restore --build --pack -c $(_BuildConfig)
+          displayName: 'Build and package'
 
 #        - script: ./eng/common/build.sh --ci --restore --publish --configuration $(_BuildConfig) /p:DotNetPublishUsingPipelines=true /p:DotNetPublishToBlobFeed=true /p:DotNetPublishBlobFeedUrl=$(_DotNetFeedUrl) /p:DotNetPublishBlobFeedKey=$(dotnetfeed-storage-access-key-1) /p:DotNetArtifactsCategory=$(_DotNetArtifactsCategory) /p:AssetManifestOS=$(assetManifestOS) /p:PlatformName=$(assetManifestPlatform) --projects $(Build.SourcesDirectory)/eng/empty.csproj
 #          displayName: Publish packages
@@ -130,12 +122,8 @@ stages:
           displayName: 'Clean up working directory'
 
         - script: |
-            build.cmd --ci --restore --build -c $(_BuildConfig)
-          displayName: 'Build (MSBuild)'
-
-        - script: |
-            build.cmd --ci --pack
-          displayName: 'Build nupkg'
+            build.cmd --ci --restore --build --pack -c $(_BuildConfig)
+          displayName: 'Build and package'
 
 #        - powershell: eng\common\build.ps1 -ci -restore -publish -configuration $(_BuildConfig) /p:DotNetPublishUsingPipelines=true /p:DotNetPublishToBlobFeed=true /p:DotNetPublishBlobFeedUrl=$(_DotNetFeedUrl) /p:DotNetPublishBlobFeedKey=$(dotnetfeed-storage-access-key-1) /p:DotNetArtifactsCategory=$(_DotNetArtifactsCategory) /p:AssetManifestOS=$(assetManifestOS) /p:PlatformName=$(assetManifestPlatform) -projects $(Build.SourcesDirectory)\eng\empty.csproj
 #          displayName: Publish packages
