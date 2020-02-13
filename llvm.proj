@@ -36,6 +36,11 @@
       <_LLVMBuildArgs Include='-DCMAKE_CXX_FLAGS="-I../llvm/include -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -DNDEBUG -D__NO_CTYPE_INLINE -D_GNU_SOURCE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS"' />
       <_LLVMBuildArgs Condition="'$(BuildOS)' == 'Linux'" Include='-DCMAKE_EXE_LINKER_FLAGS="-Wl,--build-id"' />
       <_LLVMBuildArgs Include='-DLLVM_TARGETS_TO_BUILD="X86%3BAArch64%3BARM"' />
+      <_LLVMBuildArgs Include='-DLLVM_BUILD_TESTS:BOOL=OFF"' />
+      <_LLVMBuildArgs Include='-DLLVM_BUILD_EXAMPLES:BOOL=OFF"' />
+      <_LLVMBuildArgs Include='-DLLVM_INCLUDE_EXAMPLES:BOOL=OFF"' />
+      <_LLVMBuildArgs Include='-DLLVM_TOOLS_TO_BUILD="opt;llc;llvm-config;llvm-dis;llvm-mc;llvm-as"' />
+      <_LLVMBuildArgs Include='-DLLVM_ENABLE_LIBXML2:BOOL=OFF"' />
     </ItemGroup>
 
     <Exec WorkingDirectory="$(_LLVMBuildDir)"
