@@ -51,6 +51,7 @@
     <!-- Android will use Linux package definitions -->
     <_packageTargetOSGroup>$(_derivedPackageTargetOSGroup)</_packageTargetOSGroup>
     <_packageTargetOSGroup Condition="'$(_derivedPackageTargetOSGroup)' == 'Android'">Linux</_packageTargetOSGroup>
+    <_packageTargetOSGroup Condition="'$(Platform)' == 'x64-mxe'">Windows_NT</_packageTargetOSGroup>
   </PropertyGroup>
   <PropertyGroup>
     <SkipPackageFileCheck>true</SkipPackageFileCheck>
