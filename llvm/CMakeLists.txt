@@ -1105,3 +1105,8 @@ if (LLVM_INCLUDE_BENCHMARKS)
   add_subdirectory(utils/benchmark)
   add_subdirectory(benchmarks)
 endif()
+
+# emit version we consume in Arcade
+configure_file(
+  ${CMAKE_CURRENT_SOURCE_DIR}/version.txt.in
+  ${CMAKE_CURRENT_BINARY_DIR}/version.txt)
