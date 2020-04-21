@@ -1218,3 +1218,8 @@ if (LLVM_INCLUDE_UTILS AND LLVM_INCLUDE_TOOLS)
     add_subdirectory(utils/llvm-locstats)
   endif()
 endif()
+
+# emit version we consume in Arcade
+configure_file(
+  ${CMAKE_CURRENT_SOURCE_DIR}/version.txt.in
+  ${CMAKE_CURRENT_BINARY_DIR}/version.txt)
