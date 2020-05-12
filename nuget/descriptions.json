@@ -16,7 +16,7 @@
     },
     {
         "Name": "Microsoft.NETCore.Runtime.Mono.LLVM.Tools",
-        "Description": "The llc and opt tools, used by the Mono .NET Core runtime in LLVM AOT mode.",
+        "Description": "The llvm-as, llc and opt tools, used by the Mono .NET Core runtime in LLVM AOT mode.",
         "CommonTypes": [ ]
     }
 ]
