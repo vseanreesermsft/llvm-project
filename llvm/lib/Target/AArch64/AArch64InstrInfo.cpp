@@ -1961,6 +1961,9 @@ bool AArch64InstrInfo::getMemOperandWithOffset(const MachineInstr &LdSt,
                                           int64_t &Offset,
                                           const TargetRegisterInfo *TRI) const {
   unsigned Width;
+  if (!LdSt.mayLoadOrStore())
+    return false;
+
   return getMemOperandWithOffsetWidth(LdSt, BaseOp, Offset, Width, TRI);
 }
 
