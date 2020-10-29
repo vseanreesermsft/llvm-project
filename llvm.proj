@@ -24,11 +24,11 @@
 
   <Target Name="_LLVMBuildWindows" Condition="'$(BuildOS)' == 'Windows_NT'">
     <Exec WorkingDirectory="$(_LLVMBuildDir)"
-          Command="$(_LLVMSourceDir)/scripts/ci/run-jenkins-windows.bat &quot;$(_LLVMSourceDir)&quot; &quot;$(_LLVMBuildDir)&quot; &quot;$(_LLVMInstallDir)&quot;"
+          Command="$(_LLVMSourceDir)/scripts/ci/run-jenkins-windows.bat &quot;$(_LLVMSourceDir)&quot; &quot;$(_LLVMBuildDir)&quot; &quot;$(_LLVMInstallDir)&quot; &quot;$(TargetArchitecture)&quot;"
           IgnoreStandardErrorWarningFormat="true" />
   </Target>
 
-  <Target Name="_LLVMBuildNoneWindows" Condition="'$(BuildOS)' != 'Windows_NT'">
+  <Target Name="_LLVMBuildNonWindows" Condition="'$(BuildOS)' != 'Windows_NT'">
     <PropertyGroup Condition=" '$(TargetArchitecture)' == 'arm64' ">
       <_CrossCFlags>--target=aarch64-linux-gnu --sysroot=$(ROOTFS_DIR)</_CrossCFlags>
     </PropertyGroup>
@@ -81,7 +81,7 @@
           Command="cmake -DCMAKE_INSTALL_PREFIX=$(_LLVMInstallDir) -P cmake_install.cmake" />
   </Target>
 
-  <Target Name="Build" DependsOnTargets="_LLVMBeforeBuild;_LLVMBuildWindows;_LLVMBuildNoneWindows;_LLVMAfterBuild" />
+  <Target Name="Build" DependsOnTargets="_LLVMBeforeBuild;_LLVMBuildWindows;_LLVMBuildNonWindows;_LLVMAfterBuild" />
   <Target Name="Restore" />
   <Target Name="Test" />
   <Target Name="Pack" DependsOnTargets="Build">
