@@ -353,6 +353,8 @@ ImplicitNullChecks::areMemoryOpsAliased(const MachineInstr &MI,
           return AR_MayAlias;
         continue;
       }
+      if (MMO2->getValue() == nullptr)
+		return AR_MayAlias;
       if (!AA->isNoAlias(
               MemoryLocation::getAfter(MMO1->getValue(), MMO1->getAAInfo()),
               MemoryLocation::getAfter(MMO2->getValue(), MMO2->getAAInfo())))
