@@ -1490,6 +1490,8 @@ bool sys::getHostCPUFeatures(StringMap<bool> &Features) {
     StringRef LLVMFeatureStr = StringSwitch<StringRef>(CPUFeatures[I])
 #if defined(__aarch64__)
                                    .Case("asimd", "neon")
+                                   .Case("asimddp", "dotprod")
+                                   .Case("asimdrdm", "rdm")
                                    .Case("fp", "fp-armv8")
                                    .Case("crc32", "crc")
 #else
