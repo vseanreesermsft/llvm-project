@@ -1,0 +1,25 @@
+{
+ "tool": "Credential Scanner",
+ "suppressions": [
+  {
+    "file": [
+      "/llgo/third_party/gofrontend/libgo/go/net/smtp/smtp_test.go",
+      "/llgo/third_party/gofrontend/libgo/go/crypto/tls/tls_test.go",
+      "/llgo/third_party/gofrontend/libgo/go/crypto/x509/pem_decrypt_test.go",
+      "/llgo/third_party/gofrontend/libgo/go/crypto/x509/x509_test_import.go",
+      "/llgo/third_party/gofrontend/libgo/go/crypto/x509/x509_test.go",
+      "/llgo/third_party/gofrontend/libgo/go/encoding/pem/pem_test.go",
+      "/llgo/third_party/gofrontend/libgo/go/crypto/tls/handshake_server_test.go",
+      "/llgo/third_party/gofrontend/libgo/go/net/http/httptest/server.go"
+    ],
+    "_justification": "llgo test files with embedded test certificates."
+  },
+  {
+    "file": [
+      "/compiler-rt/lib/dfsan/libc_ubuntu1404_abilist.txt",
+    ],
+    "_justification": "This file contains a list of ELF symbols and nothing more."
+  }
+ ]
+}
+
