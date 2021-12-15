@@ -14,11 +14,14 @@
     set VS_VCINSTALL_DIR=
 
     :: Try to locate installed VisualStudio VC environment.
-    if exist "%VSWHERE_TOOLS_BIN%" (
+    if "%VCINSTALLDIR%" == "" if exist "%VSWHERE_TOOLS_BIN%" (
         for /f "tokens=*" %%a in ('"%VSWHERE_TOOLS_BIN%" -latest -property installationPath') do (
             set VS_VCINSTALL_DIR=%%a\VC\
         )
     )
+
+    if NOT "%VCINSTALLDIR%" == "" set VS_VCINSTALL_DIR=%VCINSTALLDIR%
+
     :: Run VS build environment script.
     call "%VS_VCINSTALL_DIR%\Auxiliary\Build\$(_VCVarsScriptName)"
 
