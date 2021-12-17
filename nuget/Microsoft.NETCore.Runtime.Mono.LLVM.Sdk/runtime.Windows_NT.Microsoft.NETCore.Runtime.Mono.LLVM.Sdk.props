@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
   <ItemGroup>
+    <File Include="$(ProjectDir)\clang\bindings\python\clang\**" TargetPath="bindings\python\clang\" />
+    <File Include="$(_LLVMInstallDir)\bin\libclang.dll" TargetPath="tools\$(PackageTargetRuntime)\bin\" Condition="'$(TargetArchitecture)' != 'arm' and '$(TargetArchitecture)' != 'arm64'" />
     <File Include="$(_LLVMInstallDir)\bin\llvm-config.exe" TargetPath="tools\$(PackageTargetRuntime)\bin\" />
     <File Include="$(_LLVMInstallDir)\bin\llvm-config.pdb" TargetPath="tools\$(PackageTargetRuntime)\bin\" />
     <File Include="$(_LLVMInstallDir)\bin\llvm-dis.exe" TargetPath="tools\$(PackageTargetRuntime)\bin\" />

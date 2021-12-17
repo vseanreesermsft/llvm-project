@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
   <ItemGroup>
+    <File Include="$(ProjectDir)\clang\bindings\python\clang\**" TargetPath="bindings\python\clang\" />
     <File Include="$(_LLVMInstallDir)\bin\llvm-config" TargetPath="tools\$(PackageTargetRuntime)\bin\" />
     <File Include="$(_LLVMInstallDir)\bin\llvm-config.dwarf" TargetPath="tools\$(PackageTargetRuntime)\bin\" />
     <File Include="$(_LLVMInstallDir)\bin\llvm-dis" TargetPath="tools\$(PackageTargetRuntime)\bin\" />

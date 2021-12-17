@@ -126,7 +126,7 @@ stages:
       ############ WINDOWS BUILD ############
       - job: Build_Windows
         displayName: Windows
-        timeoutInMinutes: 120
+        timeoutInMinutes: 140
         strategy:
           matrix:
             x64:

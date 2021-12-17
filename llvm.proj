@@ -70,6 +70,14 @@
     <_LLVMBuildArgs Condition="'$(BuildOS)' == 'Windows_NT'" Include='-DLLVM_USE_CRT_RELEASE=MT' />
   </ItemGroup>
 
+  <ItemGroup Condition="'$(TargetArchitecture)' != 'arm' and '$(TargetArchitecture)' != 'arm64'">
+    <_LLVMBuildArgs Include='-DLLVM_ENABLE_PROJECTS=clang' />
+    <_LLVMBuildArgs Include='-DCLANG_BUILD_TOOLS:BOOL=OFF' />
+    <_LLVMBuildArgs Include='-DCLANG_INCLUDE_TESTS:BOOL=OFF' />
+    <_LLVMBuildArgs Include='-DCLANG_ENABLE_ARCMT:BOOL=OFF' />
+    <_LLVMBuildArgs Include='-DCLANG_ENABLE_STATIC_ANALYZER:BOOL=OFF' />
+  </ItemGroup>
+
   <PropertyGroup Condition="'$(BuildOS)' != 'Windows_NT'">
     <_CrossCFlags Condition="'$(BuildOS)' == 'Linux' and '$(TargetArchitecture)' == 'arm64'">--target=aarch64-linux-gnu --sysroot=$(ROOTFS_DIR)</_CrossCFlags>
     <_CrossCFlags Condition="'$(BuildOS)' == 'Linux' and '$(TargetArchitecture)' == 'arm'">--target=arm-linux-gnueabihf --sysroot=$(ROOTFS_DIR)</_CrossCFlags>
