@@ -64,6 +64,13 @@
   <ItemGroup>
     <_LLVMBuildArgs Condition="'$(BuildOS)' == 'Linux'" Include='-DCMAKE_SHARED_LINKER_FLAGS=-Wl,--build-id' />
   </ItemGroup>
+  <ItemGroup Condition="'$(TargetArchitecture)' != 'arm' and '$(TargetArchitecture)' != 'arm64'">
+    <_LLVMBuildArgs Include='-DLLVM_ENABLE_PROJECTS=clang' />
+    <_LLVMBuildArgs Include='-DCLANG_BUILD_TOOLS:BOOL=OFF' />
+    <_LLVMBuildArgs Include='-DCLANG_INCLUDE_TESTS:BOOL=OFF' />
+    <_LLVMBuildArgs Include='-DCLANG_ENABLE_ARCMT:BOOL=OFF' />
+    <_LLVMBuildArgs Include='-DCLANG_ENABLE_STATIC_ANALYZER:BOOL=OFF' />
+  </ItemGroup>
 
   <PropertyGroup Condition="'$(BuildOS)' != 'Windows_NT'">
     <_CrossCFlags Condition="'$(BuildOS)' == 'Linux' and '$(TargetArchitecture)' == 'arm64'">--target=aarch64-linux-gnu --sysroot=$(ROOTFS_DIR)</_CrossCFlags>
