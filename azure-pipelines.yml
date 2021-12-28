@@ -2,12 +2,12 @@ trigger:
   batch: true
   branches:
     include:
-    - release/11.x
+    - objwriter/12.x
 
 pr:
   branches:
     include:
-    - release/11.x
+    - objwriter/12.x
 
 variables:
 - template: eng/common-variables.yml
@@ -35,8 +35,9 @@ stages:
               vmImageName: ubuntu-20.04
               assetManifestOS: linux
               assetManifestPlatform: x64
-              imagename: mcr.microsoft.com/dotnet-buildtools/prereqs:centos-7-bfcd90a-20200121150017
+              imagename: mcr.microsoft.com/dotnet-buildtools/prereqs:centos-7-20210714125435-9b5bbc2
               rootfs: 
+              clangtarget: 
               archflag: --arch x64
               LLVMTableGenArg: 
             arm64:
@@ -45,6 +46,7 @@ stages:
               assetManifestPlatform: arm64
               imagename: mcr.microsoft.com/dotnet-buildtools/prereqs:ubuntu-16.04-cross-arm64-cfdd435-20200121150126
               rootfs: /crossrootfs/arm64
+              clangtarget: aarch64-linux-gnu
               archflag: --arch arm64
               LLVMTableGenArg: /p:LLVMTableGenPath=$(Build.SourcesDirectory)/artifacts/obj/BuildRoot-x64/bin/llvm-tblgen
             arm:
@@ -53,6 +55,7 @@ stages:
               assetManifestPlatform: arm
               imagename: mcr.microsoft.com/dotnet-buildtools/prereqs:ubuntu-16.04-cross-09ec757-20200320131433
               rootfs: /crossrootfs/arm
+              clangtarget: arm-linux-gnueabihf
               archflag: --arch arm
               LLVMTableGenArg: /p:LLVMTableGenPath=$(Build.SourcesDirectory)/artifacts/obj/BuildRoot-x64/bin/llvm-tblgen
         pool:
@@ -76,6 +79,59 @@ stages:
           displayName: 'Build and package'
           env:
             ROOTFS_DIR: $(rootfs)
+            CLANG_TARGET: $(clangtarget)
+
+        - bash: |
+            ./eng/common/build.sh --ci --restore --publish --configuration $(_BuildConfig) $(_InternalBuildArgs) /p:AssetManifestOS=$(assetManifestOS) /p:PlatformName=$(assetManifestPlatform) --projects $(Build.SourcesDirectory)/llvm.proj
+          displayName: Publish packages
+          condition: and(succeeded(), ne(variables['System.TeamProject'], 'public'), ne(variables['Build.Reason'], 'PullRequest'))
+
+      ############ LINUX MUSL BUILD ############
+      - job: Build_Linux_musl
+        displayName: Linux_musl
+        timeoutInMinutes: 120
+        strategy:
+          matrix:
+            x64:
+              vmImageName: ubuntu-20.04
+              assetManifestOS: linux-musl
+              assetManifestPlatform: x64
+              imagename: mcr.microsoft.com/dotnet-buildtools/prereqs:alpine-3.13-WithNode-20210910135845-c401c85
+              rootfs: 
+              clangtarget: 
+              archflag: --arch x64
+              LLVMTableGenArg: 
+            arm64:
+              vmImageName: ubuntu-20.04
+              assetManifestOS: linux-musl
+              assetManifestPlatform: arm64
+              imagename: mcr.microsoft.com/dotnet-buildtools/prereqs:ubuntu-16.04-cross-arm64-alpine-20210923140502-78f7860
+              rootfs: /crossrootfs/arm64
+              clangtarget: aarch64-alpine-linux-musl
+              archflag: --arch arm64
+              LLVMTableGenArg: /p:LLVMTableGenPath=$(Build.SourcesDirectory)/artifacts/obj/BuildRoot-x64/bin/llvm-tblgen
+        pool:
+          vmImage: $(vmImageName)
+        container:
+          image: $(imagename)
+        steps:
+        - bash: |
+            set -ex
+            git clean -ffdx
+            git reset --hard HEAD
+          displayName: 'Clean up working directory'
+
+        - bash: |
+            ./build.sh --ci --restore --build --arch x64 -configuration $(_BuildConfig) $(_InternalBuildArgs) /p:BuildLLVMTableGenOnly=true
+          displayName: 'Build host llvm-tblgen for cross-compiling'
+          condition: and(succeeded(), ne(variables['assetManifestPlatform'], 'x64'))
+
+        - bash: |
+            ./build.sh --ci --restore --build --pack $(archflag) --configuration $(_BuildConfig) $(_InternalBuildArgs) $(LLVMTableGenArg) /p:OutputRid=linux-musl-$(assetManifestPlatform)
+          displayName: 'Build and package'
+          env:
+            ROOTFS_DIR: $(rootfs)
+            CLANG_TARGET: $(clangtarget)
 
         - bash: |
             ./eng/common/build.sh --ci --restore --publish --configuration $(_BuildConfig) $(_InternalBuildArgs) /p:AssetManifestOS=$(assetManifestOS) /p:PlatformName=$(assetManifestPlatform) --projects $(Build.SourcesDirectory)/llvm.proj
@@ -140,12 +196,6 @@ stages:
               assetManifestOS: win
               assetManifestPlatform: arm64
               archflag: -arch arm64
-              LLVMTableGenArg: /p:LLVMTableGenPath=$(Build.SourcesDirectory)\artifacts\obj\BuildRoot-x64\bin\llvm-tblgen.exe
-            arm:
-              vmImageName: windows-2019
-              assetManifestOS: win
-              assetManifestPlatform: arm
-              archflag: -arch arm
               LLVMTableGenArg: /p:LLVMTableGenPath=$(Build.SourcesDirectory)\artifacts\obj\BuildRoot-x64\bin\llvm-tblgen.exe
         pool:
           vmImage: $(vmImageName)
