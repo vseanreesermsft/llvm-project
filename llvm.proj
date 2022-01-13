@@ -61,6 +61,10 @@
     <_LLVMBuildArgs Condition="'$(BuildOS)' == 'Windows_NT'" Include='-DLLVM_USE_CRT_RELEASE=MT' />
   </ItemGroup>
 
+  <ItemGroup>
+    <_LLVMBuildArgs Condition="'$(BuildOS)' == 'Linux'" Include='-DCMAKE_SHARED_LINKER_FLAGS=-Wl,--build-id' />
+  </ItemGroup>
+
   <PropertyGroup Condition="'$(BuildOS)' != 'Windows_NT'">
     <_CrossCFlags Condition="'$(BuildOS)' == 'Linux' and '$(TargetArchitecture)' == 'arm64'">--target=aarch64-linux-gnu --sysroot=$(ROOTFS_DIR)</_CrossCFlags>
     <_CrossCFlags Condition="'$(BuildOS)' == 'Linux' and '$(TargetArchitecture)' == 'arm'">--target=arm-linux-gnueabihf --sysroot=$(ROOTFS_DIR)</_CrossCFlags>
