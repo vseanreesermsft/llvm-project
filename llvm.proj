@@ -76,7 +76,7 @@
     <_LLVMBuildArgs Include='-DCLANG_INCLUDE_TESTS:BOOL=OFF' />
     <_LLVMBuildArgs Include='-DCLANG_ENABLE_ARCMT:BOOL=OFF' />
     <_LLVMBuildArgs Include='-DCLANG_ENABLE_STATIC_ANALYZER:BOOL=OFF' />
-    <_LLVMBuildArgs Include='-DENABLE_LINKER_BUILD_ID:BOOL=ON' />
+    <_LLVMBuildArgs Condition="'$(BuildOS)' == 'Linux'" Include='-DCMAKE_SHARED_LINKER_FLAGS=-Wl,--build-id' />
   </ItemGroup>
 
   <PropertyGroup Condition="'$(BuildOS)' != 'Windows_NT'">
