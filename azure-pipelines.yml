@@ -32,7 +32,6 @@ stages:
         strategy:
           matrix:
             x64:
-              vmImageName: ubuntu-20.04
               assetManifestOS: linux
               assetManifestPlatform: x64
               imagename: mcr.microsoft.com/dotnet-buildtools/prereqs:centos-7-20210714125435-9b5bbc2
@@ -41,7 +40,6 @@ stages:
               archflag: --arch x64
               LLVMTableGenArg: 
             arm64:
-              vmImageName: ubuntu-20.04
               assetManifestOS: linux
               assetManifestPlatform: arm64
               imagename: mcr.microsoft.com/dotnet-buildtools/prereqs:ubuntu-16.04-cross-arm64-cfdd435-20200121150126
@@ -50,7 +48,6 @@ stages:
               archflag: --arch arm64
               LLVMTableGenArg: /p:LLVMTableGenPath=$(Build.SourcesDirectory)/artifacts/obj/BuildRoot-x64/bin/llvm-tblgen
             arm:
-              vmImageName: ubuntu-20.04
               assetManifestOS: linux
               assetManifestPlatform: arm
               imagename: mcr.microsoft.com/dotnet-buildtools/prereqs:ubuntu-16.04-cross-09ec757-20200320131433
@@ -59,7 +56,11 @@ stages:
               archflag: --arch arm
               LLVMTableGenArg: /p:LLVMTableGenPath=$(Build.SourcesDirectory)/artifacts/obj/BuildRoot-x64/bin/llvm-tblgen
         pool:
-          vmImage: $(vmImageName)
+          ${{ if eq(variables['System.TeamProject'], 'public') }}:
+            vmImage: ubuntu-20.04
+          ${{ if eq(variables['System.TeamProject'], 'internal') }}:
+            name: NetCore1ESPool-Internal
+            demands: ImageOverride -equals Build.Ubuntu.1804.Amd64
         container:
           image: $(imagename)
         steps:
@@ -93,7 +94,6 @@ stages:
         strategy:
           matrix:
             x64:
-              vmImageName: ubuntu-20.04
               assetManifestOS: linux-musl
               assetManifestPlatform: x64
               imagename: mcr.microsoft.com/dotnet-buildtools/prereqs:alpine-3.13-WithNode-20210910135845-c401c85
@@ -102,7 +102,6 @@ stages:
               archflag: --arch x64
               LLVMTableGenArg: 
             arm64:
-              vmImageName: ubuntu-20.04
               assetManifestOS: linux-musl
               assetManifestPlatform: arm64
               imagename: mcr.microsoft.com/dotnet-buildtools/prereqs:ubuntu-16.04-cross-arm64-alpine-20210923140502-78f7860
@@ -111,7 +110,11 @@ stages:
               archflag: --arch arm64
               LLVMTableGenArg: /p:LLVMTableGenPath=$(Build.SourcesDirectory)/artifacts/obj/BuildRoot-x64/bin/llvm-tblgen
         pool:
-          vmImage: $(vmImageName)
+          ${{ if eq(variables['System.TeamProject'], 'public') }}:
+            vmImage: ubuntu-20.04
+          ${{ if eq(variables['System.TeamProject'], 'internal') }}:
+            name: NetCore1ESPool-Internal
+            demands: ImageOverride -equals Build.Ubuntu.1804.Amd64
         container:
           image: $(imagename)
         steps:
@@ -145,19 +148,17 @@ stages:
         strategy:
           matrix:
             x64:
-              vmImageName: macOS-10.15
               assetManifestOS: osx
               assetManifestPlatform: x64
               archflag: --arch x64
               LLVMTableGenArg: 
             arm64:
-              vmImageName: macOS-10.15
               assetManifestOS: osx
               assetManifestPlatform: arm64
               archflag: --arch arm64
               LLVMTableGenArg: /p:LLVMTableGenPath=$(Build.SourcesDirectory)/artifacts/obj/BuildRoot-x64/bin/llvm-tblgen
         pool:
-          vmImage: $(vmImageName)
+          vmImage: macOS-10.15
         steps:
         - bash: |
             set -ex
@@ -186,19 +187,26 @@ stages:
         strategy:
           matrix:
             x64:
-              vmImageName: windows-2019
               assetManifestOS: win
               assetManifestPlatform: x64
               archflag: -arch x64
               LLVMTableGenArg:
             arm64:
-              vmImageName: windows-2019
               assetManifestOS: win
               assetManifestPlatform: arm64
               archflag: -arch arm64
               LLVMTableGenArg: /p:LLVMTableGenPath=$(Build.SourcesDirectory)\artifacts\obj\BuildRoot-x64\bin\llvm-tblgen.exe
+            arm:
+              assetManifestOS: win
+              assetManifestPlatform: arm
+              archflag: -arch arm
+              LLVMTableGenArg: /p:LLVMTableGenPath=$(Build.SourcesDirectory)\artifacts\obj\BuildRoot-x64\bin\llvm-tblgen.exe
         pool:
-          vmImage: $(vmImageName)
+          ${{ if eq(variables['System.TeamProject'], 'public') }}:
+            vmImage: windows-2019
+          ${{ if eq(variables['System.TeamProject'], 'internal') }}:
+            name: NetCore1ESPool-Internal
+            demands: ImageOverride -equals Build.Server.Amd64.VS2019
         steps:
         - bash: |
             set -ex
