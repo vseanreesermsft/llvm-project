@@ -150,8 +150,7 @@ stages:
             name: NetCore1ESPool-Internal
             demands: ImageOverride -equals Build.Server.Amd64.VS2019
         steps:
-        - bash: |
-            set -ex
+        - script: |
             git clean -ffdx
             git reset --hard HEAD
           displayName: 'Clean up working directory'
