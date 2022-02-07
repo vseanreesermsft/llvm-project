@@ -91,6 +91,7 @@ stages:
       - job: Build_Linux_musl
         displayName: Linux_musl
         timeoutInMinutes: 120
+        disableComponentGovernance: true   # CG doesn't work on Linux musl
         strategy:
           matrix:
             x64:
