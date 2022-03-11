@@ -28,7 +28,7 @@ stages:
       ############ LINUX BUILD ############
       - job: Build_Linux
         displayName: Linux
-        timeoutInMinutes: 120
+        timeoutInMinutes: 180
         strategy:
           matrix:
             x64:
@@ -86,7 +86,7 @@ stages:
       ############ MACOS BUILD ############
       - job: Build_macOS
         displayName: macOS
-        timeoutInMinutes: 120
+        timeoutInMinutes: 180
         strategy:
           matrix:
             x64:
@@ -125,7 +125,7 @@ stages:
       ############ WINDOWS BUILD ############
       - job: Build_Windows
         displayName: Windows
-        timeoutInMinutes: 140
+        timeoutInMinutes: 180
         strategy:
           matrix:
             x64:
