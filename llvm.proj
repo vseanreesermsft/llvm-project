@@ -10,7 +10,7 @@
     <_VCVarsScriptName Condition="'$(BuildOS)' == 'Windows_NT' and '$(TargetArchitecture)' == 'arm'">vcvarsamd64_arm.bat</_VCVarsScriptName>
     <_SetupEnvironment Condition="'$(BuildOS)' == 'Windows_NT'">
     :: VisualStudio includes vswhere.exe that can be used to locate current VisualStudio installation.
-    set VSWHERE_TOOLS_BIN=%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\vswhere.exe
+    set VSWHERE_TOOLS_BIN=%ProgramFiles%\Microsoft Visual Studio\Installer\vswhere.exe
     set VS_VCINSTALL_DIR=
 
     :: Try to locate installed VisualStudio VC environment.
