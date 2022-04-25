@@ -71,7 +71,7 @@
     <_LLVMBuildArgs Condition="'$(BuildOS)' == 'Windows_NT'" Include='-DLLVM_USE_CRT_RELEASE=MT' />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(BuildOS)' == 'OSX' or ('$(TargetArchitecture)' != 'arm' and '$(TargetArchitecture)' != 'arm64')">
+  <ItemGroup>
     <_LLVMBuildArgs Include='-DLLVM_ENABLE_PROJECTS=clang' />
     <_LLVMBuildArgs Include='-DCLANG_BUILD_TOOLS:BOOL=OFF' />
     <_LLVMBuildArgs Include='-DCLANG_INCLUDE_TESTS:BOOL=OFF' />
