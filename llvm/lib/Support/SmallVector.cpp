@@ -27,6 +27,7 @@ namespace {
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Waix-compat"
 #endif
+
 struct Struct16B {
   alignas(16) void *X;
 };
@@ -37,6 +38,8 @@ struct Struct32B {
 #pragma GCC diagnostic pop
 #endif
 }
+
+#if 0
 static_assert(sizeof(SmallVector<void *, 0>) ==
                   sizeof(unsigned) * 2 + sizeof(void *),
               "wasted space in SmallVector size 0");
@@ -51,6 +54,7 @@ static_assert(sizeof(SmallVector<Struct32B, 0>) >= alignof(Struct32B),
 static_assert(sizeof(SmallVector<void *, 1>) ==
                   sizeof(unsigned) * 2 + sizeof(void *) * 2,
               "wasted space in SmallVector size 1");
+#endif
 
 static_assert(sizeof(SmallVector<char, 0>) ==
                   sizeof(void *) * 2 + sizeof(void *),
