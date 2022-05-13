@@ -12,7 +12,7 @@ pr:
     - dotnet/release/*
 
 variables:
-- template: eng/common-variables.yml
+- template: /eng/common-variables.yml
 
 stages:
 - stage: build
