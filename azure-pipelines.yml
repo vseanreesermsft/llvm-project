@@ -2,12 +2,14 @@ trigger:
   batch: true
   branches:
     include:
-    - release/11.x
+    - dotnet/main
+    - dotnet/release/*
 
 pr:
   branches:
     include:
-    - release/11.x
+    - dotnet/main
+    - dotnet/release/*
 
 variables:
 - template: eng/common-variables.yml
