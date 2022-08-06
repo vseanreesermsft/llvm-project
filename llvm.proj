@@ -58,6 +58,7 @@
     <_LLVMBuildArgs Condition="'$(LLVMTableGenPath)' != ''" Include='-DLLVM_TABLEGEN="$(LLVMTableGenPath)"' />
     <_LLVMBuildArgs Condition="'$(ClangTableGenPath)' != ''" Include='-DCLANG_TABLEGEN="$(ClangTableGenPath)"' />
     <_LLVMBuildArgs Include="-DCMAKE_BUILD_TYPE=Release" />
+    <_LLVMBuildArgs Include='-DLEGAL_COPYRIGHT="\xa9 Microsoft Corporation. All rights reserved."' />
     <_LLVMBuildArgs Include="-DLLVM_BUILD_LLVM_C_DYLIB=OFF" />
     <_LLVMBuildArgs Include="-DLLVM_ENABLE_DIA_SDK=OFF" />
     <_LLVMBuildArgs Include="-DLLVM_INCLUDE_TESTS=OFF" />
