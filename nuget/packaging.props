@@ -9,7 +9,7 @@
     <ReleaseNotes>https://go.microsoft.com/fwlink/?LinkID=799421</ReleaseNotes>
 
     <ProjectUrl>https://dot.net</ProjectUrl>
-    <LicenseUrl>https://github.com/dotnet/llvm-project/blob/master/llvm/LICENSE.TXT</LicenseUrl>
+    <LicenseUrl>https://github.com/dotnet/llvm-project/blob/dotnet/main/llvm/LICENSE.TXT</LicenseUrl>
 
     <PackageIndexFile>$(MSBuildThisFileDirectory)/packageIndex.json</PackageIndexFile>
 
