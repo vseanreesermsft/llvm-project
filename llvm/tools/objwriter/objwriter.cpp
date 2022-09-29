@@ -586,10 +586,19 @@ void ObjectWriter::EmitCFIStart(int Offset) {
   assert(!FrameOpened && "frame should be closed before CFIStart");
   Streamer->emitCFIStartProc(false);
   FrameOpened = true;
+  FrameHasCompactEncoding = false;
 }
 
 void ObjectWriter::EmitCFIEnd(int Offset) {
   assert(FrameOpened && "frame should be opened before CFIEnd");
+
+  // If compact unwinding was not set through EmitCFICompactUnwindEncoding
+  // force compact unwinding to use DWARF references which allow unwinding
+  // prologs and epilogs correctly.
+  if (!FrameHasCompactEncoding) {
+    Streamer->emitCFICompactUnwindEncoding(ObjFileInfo->getCompactUnwindDwarfEHFrameOnly());
+  }
+
   Streamer->emitCFIEndProc();
   FrameOpened = false;
 }
@@ -635,6 +644,29 @@ void ObjectWriter::EmitCFICode(int Offset, const char *Blob) {
     assert(false && "Unrecognized CFI");
     break;
   }
+}
+
+void ObjectWriter::EmitCFICompactUnwindEncoding(unsigned int Encoding)
+{
+  // Emits architecture specific compact unwinding encoding for MachO
+  // files on Apple platforms. Currently that's the only platform where
+  // compact unwinding tables are used.
+  //
+  // If EmitCFICompactUnwindEncoding is never called then EmitCFIEnd
+  // will cause compact unwinding to reference DWARF CFI info. It
+  // essentially turns the compact unwinding tables into an index for
+  // the DWARF CFI data, much like .eh_frame_hdr works in ELF files.
+  //
+  // If Encoding is set to zero it instructs LLVM to infer the compact
+  // unwinding encoding from the DWARF CFI data.
+  //
+  // Any non-zero value in Encoding is emitted directly into the
+  // __compact_unwind section and then processed by the linker.
+  //
+  // See generateCompactUnwindEncoding in AArch64AsmBackend.cpp and
+  // X86AsmBackend.cpp for specific encodings for a given architecture.
+  FrameHasCompactEncoding = true;
+  Streamer->emitCFICompactUnwindEncoding(Encoding);
 }
 
 void ObjectWriter::EmitLabelDiff(const MCSymbol *From, const MCSymbol *To,
