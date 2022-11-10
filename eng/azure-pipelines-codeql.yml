@@ -6,7 +6,8 @@ schedules:
     displayName: Weekly Monday CodeQL/Semmle run
     branches:
       include:
-      - main
+      - dotnet/main
+      - objwriter/12.x
     always: true
 
 variables:
