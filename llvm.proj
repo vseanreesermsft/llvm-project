@@ -59,6 +59,7 @@
     <_LLVMBuildArgs Include='-DLLVM_ENABLE_TERMINFO:BOOL=OFF' />
     <_LLVMBuildArgs Condition="'$(BuildOS)' == 'Windows_NT'" Include='-DLLVM_USE_CRT_DEBUG=MT' />
     <_LLVMBuildArgs Condition="'$(BuildOS)' == 'Windows_NT'" Include='-DLLVM_USE_CRT_RELEASE=MT' />
+    <_LLVMBuildArgs Condition="'$(BuildOS)' == 'Windows_NT'" Include='-DLLVM_ENABLE_ZLIB=OFF' />
   </ItemGroup>
 
   <ItemGroup>
