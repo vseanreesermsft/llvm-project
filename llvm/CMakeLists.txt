@@ -28,6 +28,8 @@ if(NOT DEFINED LLVM_VERSION_SUFFIX)
   set(LLVM_VERSION_SUFFIX)
 endif()
 
+set(MONO_API_VERSION 1600)
+
 if (NOT PACKAGE_VERSION)
   set(PACKAGE_VERSION
     "${LLVM_VERSION_MAJOR}.${LLVM_VERSION_MINOR}.${LLVM_VERSION_PATCH}${LLVM_VERSION_SUFFIX}")
@@ -1345,3 +1347,8 @@ endif()
 if (LLVM_INCLUDE_UTILS AND LLVM_INCLUDE_TOOLS)
   add_subdirectory(utils/llvm-locstats)
 endif()
+
+# emit version we consume in Arcade
+configure_file(
+  ${CMAKE_CURRENT_SOURCE_DIR}/version.txt.in
+  ${CMAKE_CURRENT_BINARY_DIR}/version.txt)
