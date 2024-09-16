@@ -2,11 +2,11 @@ trigger:
   none
 
 schedules:
-  - cron: 0 12 * * 1
-    displayName: Weekly Monday CodeQL/Semmle run
+  - cron: 0 0 */3 * *
+    displayName: Weekly Monday CodeQL run
     branches:
       include:
-      - dotnet/main-16.x
+      - dotnet/main-19.x
     always: true
 
 variables:
