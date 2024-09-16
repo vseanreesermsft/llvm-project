@@ -3,7 +3,7 @@ trigger:
 
 schedules:
   - cron: 0 0 */3 * *
-    displayName: Weekly Monday CodeQL run
+    displayName: Periodic CodeQL run
     branches:
       include:
       - dotnet/main-19.x
