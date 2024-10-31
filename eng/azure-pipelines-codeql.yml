@@ -7,7 +7,6 @@ schedules:
     branches:
       include:
       - dotnet/main*
-      - dotnet/release/*
     always: true
 
 variables:
